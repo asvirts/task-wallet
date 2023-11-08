@@ -3,25 +3,30 @@
 import { useState } from "react"
 
 export default function Home() {
-  let [num, setNum] = useState(0)
-
-  function inc() {
-    setNum(num + 1)
+  const TodoList = ({ todos }) => {
+    return (
+      <ul>
+        {todos.map((todo) => (
+          <Todo key={todo.id} text={todo.text} completed={todo.completed} />
+        ))}
+      </ul>
+    )
   }
 
-  function dec() {
-    setNum(num - 1)
+  const Todo = ({ text, completed }) => {
+    return (
+      <li>
+        <input
+          type="checkbox"
+          checked={completed}
+          onChange={() => {
+            // TODO: Update the todo list
+          }}
+        />
+        {text}
+      </li>
+    )
   }
 
-  return (
-    <main>
-      <p>Number = {num}</p>
-      <button onClick={inc} className="bg-slate-600 px-3 py-2 rounded">
-        Increment
-      </button>
-      <button onClick={dec} className="bg-slate-400 px-3 py-2 rounded">
-        Decrement
-      </button>
-    </main>
-  )
+  return TodoList
 }
