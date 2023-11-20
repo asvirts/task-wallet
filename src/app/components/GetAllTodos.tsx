@@ -1,5 +1,5 @@
 export const GetAllTodos = async () => {
-    const res = await fetch(`https://localhost:3001/tasks`, { cache: "no-store" });
+    const res = await fetch("localhost:3001/tasks");
     const todos = await res.json();
     return todos;
   };
