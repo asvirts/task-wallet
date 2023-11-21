@@ -8,22 +8,22 @@ const supabase = createClient(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdW53cHNseXZhem1jcXpheXRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA1OTU4NTcsImV4cCI6MjAxNjE3MTg1N30.mJ8LTcUuOWalOj_7VRGjJDwo7CBQ29xU4mLeiBfyKDQ"
 );
 
-export default function GetAllCountries() {
-  const [countries, setCountries] = useState([]);
+export default function GetAllTasks() {
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    getCountries();
+    getTasks();
   }, []);
 
-  async function getCountries() {
-    const { data } = await supabase.from("countries").select();
-    setCountries(data);
+  async function getTasks() {
+    const { data } = await supabase.from("tasks").select();
+    setTasks(data);
   }
 
   return (
     <ul>
-      {countries.map((country) => (
-        <li key={country.name}>{country.name}</li>
+      {tasks.map((task) => (
+        <li key={task.name}>{task.name}</li>
       ))}
     </ul>
   );
