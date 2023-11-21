@@ -24,6 +24,9 @@ export default function GetAllTodos(props) {
     setTasks([...tasks, newTask]);
   }
 
+  const tasksNoun = taskList.length !== 1 ? "tasks" : "task";
+  const headingText = `${taskList.length} ${tasksNoun} remaining`;
+
   return (
     <div className="todoapp stack-large">
       <h1>taskwallet</h1>
@@ -33,7 +36,7 @@ export default function GetAllTodos(props) {
         <FilterButton />
         <FilterButton />
       </div>
-      <h2 id="list-heading">3 tasks remaining</h2>
+      <h2 id="list-heading">{headingText}</h2>
       <ul
         role="list"
         className="todo-list stack-large stack-exception"
