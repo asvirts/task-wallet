@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export default function Todo(props) {
+  const [isEditing, setEditing] = useState(false);
+
   return (
     <li className="todo stack-small">
       <div className="c-cb">
