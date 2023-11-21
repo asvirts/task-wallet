@@ -64,7 +64,7 @@ export default function GetAllTodos(props) {
     <div className="todoapp stack-large">
       <h1>taskwallet</h1>
       <Form addTask={addTask} />
-      <div className="filters btn-group stack-exception">
+      <div className="filters btn-group stack-exception my-5">
         <FilterButton />
         <FilterButton />
         <FilterButton />

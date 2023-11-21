@@ -4,7 +4,7 @@ export default function Todo(props) {
   const [isEditing, setEditing] = useState(false);
 
   return (
-    <li className="todo stack-small">
+    <li className="todo stack-small my-2">
       <div className="c-cb">
         <input
           id={props.id}
