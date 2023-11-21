@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import GetAllTodos from "@/components/GetAllTodos";
+import GetAllCountries from "@/components/GetAllCountries";
 
 export const metadata: Metadata = {
   title: "task-wallet",
@@ -17,6 +18,7 @@ export default function Home(props: any) {
   return (
     <main className="p-5">
       <GetAllTodos tasks={DATA} />
+      <GetAllCountries />
     </main>
   );
 }
