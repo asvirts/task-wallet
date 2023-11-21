@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import GetAllTodos from "@/components/GetAllTodos";
 
 export const metadata: Metadata = {
