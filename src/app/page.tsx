@@ -14,7 +14,7 @@ const DATA = [
 
 export default function Home(props) {
   return (
-    <main>
+    <main className="p-5">
       <GetAllTodos tasks={DATA} />
     </main>
   );
