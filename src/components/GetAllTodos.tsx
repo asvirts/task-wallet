@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
 
-import FilterButton from "./FilterButton";
 import Form from "./Form";
 import Todo from "./Todo";
 
@@ -51,11 +50,7 @@ export default function GetAllTodos(props: any) {
     <div className="todoapp stack-large">
       <h1>taskwallet</h1>
       <Form addTask={addTask} />
-      <div className="filters btn-group stack-exception my-5">
-        <FilterButton />
-        <FilterButton />
-        <FilterButton />
-      </div>
+      <div className="filters btn-group stack-exception my-5"></div>
       <h2 id="list-heading">{headingText}</h2>
       <ul
         role="list"
