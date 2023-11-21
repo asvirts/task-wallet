@@ -9,21 +9,21 @@ const supabase = createClient(
 );
 
 export default function GetAllTasks() {
-  const [tasks, setTasks] = useState([]);
+  const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    getTasks();
+    getCountries();
   }, []);
 
-  async function getTasks() {
-    let { data } = await supabase.from("tasks").select();
-    setTasks(data);
+  async function getCountries() {
+    const { data } = await supabase.from("countries").select();
+    setCountries(data);
   }
 
   return (
     <ul>
-      {tasks.map((task) => (
-        <li key={task.name}>{task.name}</li>
+      {countries.map((country) => (
+        <li key={country.name}>{country.name}</li>
       ))}
     </ul>
   );

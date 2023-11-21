@@ -18,6 +18,7 @@ export default function Home(props: any) {
   return (
     <main className="p-5">
       <GetAllTodos tasks={DATA} />
+      <h2 className="font-bold mt-5">List of Supabase data:</h2>
       <GetAllTasks />
     </main>
   );
