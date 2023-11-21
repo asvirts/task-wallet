@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { nanoid } from "nanoid";
+
 import FilterButton from "./FilterButton";
 import Form from "./Form";
 import Todo from "./Todo";
@@ -18,7 +20,7 @@ export default function GetAllTodos(props) {
   ));
 
   function addTask(name) {
-    const newTask = { id: "id", name, completed: false };
+    const newTask = { id: `todo-${nanoid()}`, name, completed: false };
     setTasks([...tasks, newTask]);
   }
 
