@@ -23,18 +23,6 @@ export default function GetAllTodos(props: any) {
     setTasks(updatedTasks);
   }
 
-  function editTask(id: any, newName: any) {
-    const editedTaskList = tasks.map((task: { id: any }) => {
-      // if this task has the same ID as the edited task
-      if (id === task.id) {
-        //
-        return { ...task, name: newName };
-      }
-      return task;
-    });
-    setTasks(editedTaskList);
-  }
-
   function deleteTask(id: any) {
     const remainingTasks = tasks.filter((task: { id: any }) => id !== task.id);
     setTasks(remainingTasks);
@@ -48,7 +36,6 @@ export default function GetAllTodos(props: any) {
       key={task.id}
       toggleTaskCompleted={toggleTaskCompleted}
       deleteTask={deleteTask}
-      editTask={editTask}
     />
   ));
 
