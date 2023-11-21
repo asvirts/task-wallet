@@ -16,7 +16,7 @@ export default function GetAllTasks() {
   }, []);
 
   async function getTasks() {
-    const { data } = await supabase.from("tasks").select();
+    let { data } = await supabase.from("tasks").select();
     setTasks(data);
   }
 
