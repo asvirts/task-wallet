@@ -13,7 +13,7 @@ const DATA = [
   { id: "todo-3", name: "Grind", completed: true },
 ];
 
-export default function Home(props) {
+export default function Home(props: any) {
   return (
     <main className="p-5">
       <GetAllTodos tasks={DATA} />

@@ -7,11 +7,11 @@ import FilterButton from "./FilterButton";
 import Form from "./Form";
 import Todo from "./Todo";
 
-export default function GetAllTodos(props) {
+export default function GetAllTodos(props: any) {
   const [tasks, setTasks] = useState(props.tasks);
 
-  function toggleTaskCompleted(id) {
-    const updatedTasks = tasks.map((task) => {
+  function toggleTaskCompleted(id: any) {
+    const updatedTasks = tasks.map((task: { id: any; completed: any }) => {
       // if this task has the same ID as the edited task
       if (id === task.id) {
         // use object spread to make a new object
@@ -23,8 +23,8 @@ export default function GetAllTodos(props) {
     setTasks(updatedTasks);
   }
 
-  function editTask(id, newName) {
-    const editedTaskList = tasks.map((task) => {
+  function editTask(id: any, newName: any) {
+    const editedTaskList = tasks.map((task: { id: any }) => {
       // if this task has the same ID as the edited task
       if (id === task.id) {
         //
@@ -35,12 +35,12 @@ export default function GetAllTodos(props) {
     setTasks(editedTaskList);
   }
 
-  function deleteTask(id) {
-    const remainingTasks = tasks.filter((task) => id !== task.id);
+  function deleteTask(id: any) {
+    const remainingTasks = tasks.filter((task: { id: any }) => id !== task.id);
     setTasks(remainingTasks);
   }
 
-  const taskList = tasks.map((task) => (
+  const taskList = tasks.map((task: { id: any; name: any; completed: any }) => (
     <Todo
       id={task.id}
       name={task.name}
@@ -52,7 +52,7 @@ export default function GetAllTodos(props) {
     />
   ));
 
-  function addTask(name) {
+  function addTask(name: any) {
     const newTask = { id: `todo-${nanoid()}`, name, completed: false };
     setTasks([...tasks, newTask]);
   }

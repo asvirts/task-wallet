@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Todo(props) {
+export default function Todo(props: any) {
   const [isEditing, setEditing] = useState(false);
 
   return (

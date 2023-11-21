@@ -1,17 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 
-function Form(props) {
+function Form(props: any) {
   const [name, setName] = useState("");
 
-  function handleSubmit(e) {
+  function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
     props.addTask(name);
     setName("");
   }
 
-  function handleChange(e) {
+  function handleChange(e: { target: { value: SetStateAction<string> } }) {
     setName(e.target.value);
   }
 
