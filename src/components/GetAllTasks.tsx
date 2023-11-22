@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 import { Task } from "@/types";
-import TaskItem from "./Task";
-import Form from "./Form";
 
 const supabase = createClient(
   "https://glunwpslyvazmcqzayth.supabase.co",
@@ -15,38 +13,35 @@ const supabase = createClient(
 export default function GetAllTasks() {
   const [tasks, setTasks] = useState([]);
 
+  async function getTasks() {
+    let { data } = await supabase.from("tasks").select("name");
+
+    setTasks(data);
+  }
+
   useEffect(() => {
     getTasks();
   }, []);
 
-  async function getTasks() {
-    const { data }: any = await supabase.from("tasks").select("name");
-    setTasks(data);
-  }
+  // const taskList = tasks.map((task: Task) => (
+  //   <TaskItem
+  //     id={task.id}
+  //     name={task.name}
+  //     completed={task.completed}
+  //     key={task.id}
+  //     toggleTaskCompleted={toggleTaskCompleted}
+  //     deleteTask={deleteTask}
+  //   />
+  // ));
 
-  const taskList = tasks.map((task: Task) => (
-    <TaskItem
-      id={task.id}
-      name={task.name}
-      completed={task.completed}
-      key={task.id}
-      toggleTaskCompleted={toggleTaskCompleted}
-      deleteTask={deleteTask}
-    />
-  ));
+  // async function addTask(name: string) {
+  //   const taskCount = await supabase
+  //     .from("tasks")
+  //     .select("name", { count: "exact" });
 
-  async function addTask(name: any) {
-    const taskCount = await supabase
-      .from("tasks")
-      .select("name", { count: "exact" });
-<<<<<<< HEAD
-
-    const newTask: Task = { id: `todo-${taskCount}`, name, completed: false };
-=======
-    const newTask = { id: `todo-${taskCount}`, name, completed: false };
->>>>>>> parent of f6c25a4 (defining types)
-    setTasks([...tasks, newTask]);
-  }
+  //   const newTask: Task = { id: `todo-${taskCount}`, name, completed: false };
+  //   setTasks([...tasks, newTask]);
+  // }
 
   function toggleTaskCompleted(id: any) {
     const updatedTasks = tasks.map((task: { id: any; completed: any }) => {
@@ -71,7 +66,6 @@ export default function GetAllTasks() {
 
   return (
     <>
-      <Form addTask={addTask} />
       <h2 id="list-heading" className="font-bold">
         {headingText}:
       </h2>

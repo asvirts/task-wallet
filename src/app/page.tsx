@@ -1,13 +1,12 @@
-import type { Metadata } from "next";
 import GetAllTasks from "@/components/GetAllTasks";
-import Form from "@/components/Form";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "task-wallet",
+  title: "TaskWallet",
   description: "Your tasks, with you wherever you go",
 };
 
-export default function Home(props: any) {
+export default function Home() {
   return (
     <main className="p-5">
       <h1 className="font-bold text-4xl">TaskWallet</h1>
