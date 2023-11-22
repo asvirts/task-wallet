@@ -39,8 +39,14 @@ export default function GetAllTasks() {
     const taskCount = await supabase
       .from("tasks")
       .select("name", { count: "exact" });
-    const newTask: Task = { id: `todo-${taskCount}`, name, completed: false };
-    setTasks([...tasks, newTask]);
+
+    const { data } = await supabase
+      .from("tasks")
+      .insert([{ id: { taskCount }, name: { name }, completed: false }])
+      .select();
+
+    // const newTask: Task = { id: `todo-${taskCount}`, name, completed: false };
+    setTasks([...tasks, data]);
   }
 
   function toggleTaskCompleted(id: any) {
