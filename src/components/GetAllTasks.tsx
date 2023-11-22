@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
-import { Task, TaskName } from "@/types";
+import { Task } from "@/types";
 import TaskItem from "./Task";
 import Form from "./Form";
 
@@ -35,19 +35,13 @@ export default function GetAllTasks() {
     />
   ));
 
-  async function addTask(e: any, name: string) {
-    e.preventDefault();
+  async function addTask(name: string) {
     const taskCount = await supabase
       .from("tasks")
       .select("name", { count: "exact" });
 
-    const { data } = await supabase
-      .from("tasks")
-      .insert([{ id: { taskCount }, name: { name }, completed: false }])
-      .select();
-
-    // const newTask: Task = { id: `todo-${taskCount}`, name, completed: false };
-    setTasks([...tasks, data]);
+    const newTask: Task = { id: `todo-${taskCount}`, name, completed: false };
+    setTasks([...tasks, newTask]);
   }
 
   function toggleTaskCompleted(id: any) {
