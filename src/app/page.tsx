@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import GetAllTasks from "@/components/GetAllTasks";
-import Form from "@/components/Form";
 
 export const metadata: Metadata = {
   title: "task-wallet",
