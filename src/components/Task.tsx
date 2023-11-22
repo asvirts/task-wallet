@@ -1,4 +1,4 @@
-export default function Task(props: any) {
+export default function TaskItem(props: any) {
   return (
     <li className="todo stack-small my-2">
       <div className="c-cb">

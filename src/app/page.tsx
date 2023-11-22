@@ -11,7 +11,6 @@ export default function Home(props: any) {
   return (
     <main className="p-5">
       <h1 className="font-bold text-4xl">TaskWallet</h1>
-      <Form />
       <GetAllTasks />
     </main>
   );

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 import { Task } from "@/types";
+import TaskItem from "./Task";
+import Form from "./Form";
 
 const supabase = createClient(
   "https://glunwpslyvazmcqzayth.supabase.co",
@@ -22,50 +24,49 @@ export default function GetAllTasks() {
     setTasks(data);
   }
 
-  // const taskList = tasks.map((task: { id: any; name: any; completed: any }) => (
-  //   <Task
-  //     id={task.id}
-  //     name={task.name}
-  //     completed={task.completed}
-  //     key={task.id}
-  //     toggleTaskCompleted={toggleTaskCompleted}
-  //     deleteTask={deleteTask}
-  //   />
-  // ));
+  const taskList = tasks.map((task: Task) => (
+    <TaskItem
+      id={task.id}
+      name={task.name}
+      completed={task.completed}
+      key={task.id}
+      toggleTaskCompleted={toggleTaskCompleted}
+      deleteTask={deleteTask}
+    />
+  ));
 
-  // function addTask(name: any) {
-  //   const newTask = { id: `todo-${nanoid()}`, name, completed: false };
-  //   setTasks([...tasks, newTask]);
-  // }
+  async function addTask(name: any) {
+    const taskCount = await supabase
+      .from("tasks")
+      .select("name", { count: "exact" });
+    const newTask = { id: `todo-${taskCount}`, name, completed: false };
+    setTasks([...tasks, newTask]);
+  }
 
-  // function toggleTaskCompleted(id: any) {
-  //   const updatedTasks = tasks.map((task: { id: any; completed: any }) => {
-  //     // if this task has the same ID as the edited task
-  //     if (id === task.id) {
-  //       // use object spread to make a new object
-  //       // whose `completed` prop has been inverted
-  //       return { ...task, completed: !task.completed };
-  //     }
-  //     return task;
-  //   });
-  //   setTasks(updatedTasks);
-  // }
+  function toggleTaskCompleted(id: any) {
+    const updatedTasks = tasks.map((task: { id: any; completed: any }) => {
+      // if this task has the same ID as the edited task
+      if (id === task.id) {
+        // use object spread to make a new object
+        // whose `completed` prop has been inverted
+        return { ...task, completed: !task.completed };
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+  }
 
-  // function deleteTask(id: any) {
-  //   const remainingTasks = tasks.filter((task: { id: any }) => id !== task.id);
-  //   setTasks(remainingTasks);
-  // }
-
-  // function addTask(name: any) {
-  //   const newTask = { id: `todo-${nanoid()}`, name, completed: false };
-  //   setTasks([...tasks, newTask]);
-  // }
+  function deleteTask(id: any) {
+    const remainingTasks = tasks.filter((task: { id: any }) => id !== task.id);
+    setTasks(remainingTasks);
+  }
 
   const tasksNoun = tasks.length !== 1 ? "tasks" : "task";
   const headingText = `${tasks.length} ${tasksNoun} remaining`;
 
   return (
     <>
+      <Form addTask={addTask} />
       <h2 id="list-heading" className="font-bold">
         {headingText}:
       </h2>
