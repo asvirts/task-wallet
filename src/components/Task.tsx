@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-export default function Todo(props: any) {
+export default function Task(props: any) {
   return (
     <li className="todo stack-small my-2">
       <div className="c-cb">

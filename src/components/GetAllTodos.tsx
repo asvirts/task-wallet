@@ -4,7 +4,7 @@ import { useState } from "react";
 import { nanoid } from "nanoid";
 
 import Form from "./Form";
-import Todo from "./Todo";
+import Task from "./Task";
 
 export default function GetAllTodos(props: any) {
   const [tasks, setTasks] = useState(props.tasks);
@@ -28,7 +28,7 @@ export default function GetAllTodos(props: any) {
   }
 
   const taskList = tasks.map((task: { id: any; name: any; completed: any }) => (
-    <Todo
+    <Task
       id={task.id}
       name={task.name}
       completed={task.completed}
