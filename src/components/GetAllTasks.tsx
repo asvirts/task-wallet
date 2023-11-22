@@ -35,7 +35,8 @@ export default function GetAllTasks() {
     />
   ));
 
-  async function addTask(name: string) {
+  async function addTask(e: any, name: string) {
+    e.preventDefault();
     const taskCount = await supabase
       .from("tasks")
       .select("name", { count: "exact" });
