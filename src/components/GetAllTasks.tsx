@@ -13,7 +13,7 @@ const supabase = createClient(
 );
 
 export default function GetAllTasks() {
-  const [tasks, setTasks]: any = useState([]);
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     getTasks();
@@ -35,12 +35,16 @@ export default function GetAllTasks() {
     />
   ));
 
-  async function addTask(name: string) {
+  async function addTask(name: any) {
     const taskCount = await supabase
       .from("tasks")
       .select("name", { count: "exact" });
+<<<<<<< HEAD
 
     const newTask: Task = { id: `todo-${taskCount}`, name, completed: false };
+=======
+    const newTask = { id: `todo-${taskCount}`, name, completed: false };
+>>>>>>> parent of f6c25a4 (defining types)
     setTasks([...tasks, newTask]);
   }
 
