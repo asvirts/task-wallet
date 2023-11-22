@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import GetAllTodos from "@/components/GetAllTodos";
 import GetAllTasks from "@/components/GetAllTasks";
 import Form from "@/components/Form";
 

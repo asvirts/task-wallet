@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
-import Form from "./Form";
 import { Task } from "@/types";
 
 const supabase = createClient(
@@ -19,9 +18,25 @@ export default function GetAllTasks() {
   }, []);
 
   async function getTasks() {
-    const { data } = await supabase.from("tasks").select();
+    const { data }: any = await supabase.from("tasks").select("name");
     setTasks(data);
   }
+
+  // const taskList = tasks.map((task: { id: any; name: any; completed: any }) => (
+  //   <Task
+  //     id={task.id}
+  //     name={task.name}
+  //     completed={task.completed}
+  //     key={task.id}
+  //     toggleTaskCompleted={toggleTaskCompleted}
+  //     deleteTask={deleteTask}
+  //   />
+  // ));
+
+  // function addTask(name: any) {
+  //   const newTask = { id: `todo-${nanoid()}`, name, completed: false };
+  //   setTasks([...tasks, newTask]);
+  // }
 
   // function toggleTaskCompleted(id: any) {
   //   const updatedTasks = tasks.map((task: { id: any; completed: any }) => {
