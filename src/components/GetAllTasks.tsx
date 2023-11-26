@@ -3,12 +3,10 @@
 import { useEffect, useState } from "react"
 import { createClient } from "@supabase/supabase-js"
 
-const surl = import.meta.url[Symbol]
-
 import { Task } from "@/types"
 
 const supabase = createClient(
-  SUPABASE,
+  process.env.REACT_APP_SUPABASE_URL,
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdW53cHNseXZhem1jcXpheXRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA1OTU4NTcsImV4cCI6MjAxNjE3MTg1N30.mJ8LTcUuOWalOj_7VRGjJDwo7CBQ29xU4mLeiBfyKDQ"
 )
 
