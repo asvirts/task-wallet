@@ -1,27 +1,27 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { useEffect, useState } from "react"
+import { createClient } from "@supabase/supabase-js"
 
-import { Task } from "@/types";
+import { Task } from "@/types"
 
 const supabase = createClient(
   "https://glunwpslyvazmcqzayth.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdW53cHNseXZhem1jcXpheXRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA1OTU4NTcsImV4cCI6MjAxNjE3MTg1N30.mJ8LTcUuOWalOj_7VRGjJDwo7CBQ29xU4mLeiBfyKDQ"
-);
+)
 
 export default function GetAllTasks() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([])
 
   async function getTasks() {
-    let { data } = await supabase.from("tasks").select("name");
+    let { data }: any = await supabase.from("tasks").select("name")
 
-    setTasks(data);
+    setTasks(data)
   }
 
   useEffect(() => {
-    getTasks();
-  }, []);
+    getTasks()
+  }, [])
 
   // const taskList = tasks.map((task: Task) => (
   //   <TaskItem
@@ -43,26 +43,26 @@ export default function GetAllTasks() {
   //   setTasks([...tasks, newTask]);
   // }
 
-  function toggleTaskCompleted(id: any) {
-    const updatedTasks = tasks.map((task: { id: any; completed: any }) => {
-      // if this task has the same ID as the edited task
-      if (id === task.id) {
-        // use object spread to make a new object
-        // whose `completed` prop has been inverted
-        return { ...task, completed: !task.completed };
-      }
-      return task;
-    });
-    setTasks(updatedTasks);
-  }
+  // function toggleTaskCompleted(id: any) {
+  //   const updatedTasks = tasks.map((task: { id: any; completed: any }) => {
+  //     // if this task has the same ID as the edited task
+  //     if (id === task.id) {
+  //       // use object spread to make a new object
+  //       // whose `completed` prop has been inverted
+  //       return { ...task, completed: !task.completed }
+  //     }
+  //     return task
+  //   })
+  //   setTasks(updatedTasks)
+  // }
 
-  function deleteTask(id: any) {
-    const remainingTasks = tasks.filter((task: { id: any }) => id !== task.id);
-    setTasks(remainingTasks);
-  }
+  // function deleteTask(id: any) {
+  //   const remainingTasks = tasks.filter((task: { id: any }) => id !== task.id)
+  //   setTasks(remainingTasks)
+  // }
 
-  const tasksNoun = tasks.length !== 1 ? "tasks" : "task";
-  const headingText = `${tasks.length} ${tasksNoun} remaining`;
+  const tasksNoun = tasks.length !== 1 ? "tasks" : "task"
+  const headingText = `${tasks.length} ${tasksNoun} remaining`
 
   return (
     <>
@@ -75,5 +75,5 @@ export default function GetAllTasks() {
         ))}
       </ul>
     </>
-  );
+  )
 }
