@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react"
 import { createClient } from "@supabase/supabase-js"
 
+const surl = import.meta.url[Symbol]
+
 import { Task } from "@/types"
 
 const supabase = createClient(
-  "https://glunwpslyvazmcqzayth.supabase.co",
+  SUPABASE,
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdW53cHNseXZhem1jcXpheXRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA1OTU4NTcsImV4cCI6MjAxNjE3MTg1N30.mJ8LTcUuOWalOj_7VRGjJDwo7CBQ29xU4mLeiBfyKDQ"
 )
 
@@ -34,14 +36,13 @@ export default function GetAllTasks() {
   //   />
   // ));
 
-  // async function addTask(name: string) {
-  //   const taskCount = await supabase
-  //     .from("tasks")
-  //     .select("name", { count: "exact" });
+  async function addTask() {
+    const { data }: any = await supabase
+      .from("tasks")
+      .insert([{ id: 4, name: "otherValue" }])
 
-  //   const newTask: Task = { id: `todo-${taskCount}`, name, completed: false };
-  //   setTasks([...tasks, newTask]);
-  // }
+    setTasks([...tasks, data])
+  }
 
   // function toggleTaskCompleted(id: any) {
   //   const updatedTasks = tasks.map((task: { id: any; completed: any }) => {
@@ -69,6 +70,12 @@ export default function GetAllTasks() {
       <h2 id="list-heading" className="font-bold">
         {headingText}:
       </h2>
+      <button
+        className=" bg-gray-800 text-white px-3 py-2 rounded"
+        onClick={() => addTask()}
+      >
+        Add Task
+      </button>
       <ul role="list" aria-labelledby="list-heading">
         {tasks.map((task: Task) => (
           <li key={task.name}>{task.name}</li>
