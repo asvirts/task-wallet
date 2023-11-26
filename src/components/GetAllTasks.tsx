@@ -6,7 +6,7 @@ import { createClient } from "@supabase/supabase-js"
 import { Task } from "@/types"
 
 const supabase = createClient(
-  process.env.REACT_APP_SUPABASE_URL,
+  "https://glunwpslyvazmcqzayth.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdW53cHNseXZhem1jcXpheXRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA1OTU4NTcsImV4cCI6MjAxNjE3MTg1N30.mJ8LTcUuOWalOj_7VRGjJDwo7CBQ29xU4mLeiBfyKDQ"
 )
 
@@ -34,12 +34,16 @@ export default function GetAllTasks() {
   //   />
   // ));
 
-  async function addTask() {
-    const { data }: any = await supabase
-      .from("tasks")
-      .insert([{ id: 4, name: "otherValue" }])
+  const addTask = async () => {
+    const newTodo = {
+      id: 4,
+      name: "Rock n roll",
+    }
 
-    setTasks([...tasks, data])
+    const result: any = await supabase.from("tasks").insert(newTodo).select()
+    setTasks([result.data, ...tasks])
+
+    getTasks()
   }
 
   // function toggleTaskCompleted(id: any) {
