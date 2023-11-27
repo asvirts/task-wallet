@@ -1,27 +1,27 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { createClient } from "@supabase/supabase-js"
+import { useEffect, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
 
-import { Task } from "@/types"
+import { Task } from "@/types";
 
 const supabase = createClient(
   "https://glunwpslyvazmcqzayth.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdsdW53cHNseXZhem1jcXpheXRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA1OTU4NTcsImV4cCI6MjAxNjE3MTg1N30.mJ8LTcUuOWalOj_7VRGjJDwo7CBQ29xU4mLeiBfyKDQ"
-)
+);
 
 export default function GetAllTasks() {
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   async function getTasks() {
-    let { data }: any = await supabase.from("tasks").select("name")
+    let { data }: any = await supabase.from("tasks").select("name");
 
-    setTasks(data)
+    setTasks(data);
   }
 
   useEffect(() => {
-    getTasks()
-  }, [])
+    getTasks();
+  }, [tasks]);
 
   // const taskList = tasks.map((task: Task) => (
   //   <TaskItem
@@ -36,15 +36,13 @@ export default function GetAllTasks() {
 
   const addTask = async () => {
     const newTodo = {
-      id: 4,
-      name: "Rock n roll",
-    }
+      id: Date.now(),
+      name: "Rick roll",
+    };
 
-    const result: any = await supabase.from("tasks").insert(newTodo).select()
-    setTasks([result.data, ...tasks])
-
-    getTasks()
-  }
+    const { data }: any = await supabase.from("tasks").insert(newTodo).select();
+    setTasks((previousTasks) => [data, ...previousTasks]);
+  };
 
   // function toggleTaskCompleted(id: any) {
   //   const updatedTasks = tasks.map((task: { id: any; completed: any }) => {
@@ -64,8 +62,8 @@ export default function GetAllTasks() {
   //   setTasks(remainingTasks)
   // }
 
-  const tasksNoun = tasks.length !== 1 ? "tasks" : "task"
-  const headingText = `${tasks.length} ${tasksNoun} remaining`
+  const tasksNoun = tasks.length !== 1 ? "tasks" : "task";
+  const headingText = `${tasks.length} ${tasksNoun} remaining`;
 
   return (
     <>
@@ -80,9 +78,9 @@ export default function GetAllTasks() {
       </button>
       <ul role="list" aria-labelledby="list-heading">
         {tasks.map((task: Task) => (
-          <li key={task.name}>{task.name}</li>
+          <li key={task?.id}>{task?.name}</li>
         ))}
       </ul>
     </>
-  )
+  );
 }
