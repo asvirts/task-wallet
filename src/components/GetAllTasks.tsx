@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { createClient } from "@supabase/supabase-js"
 
 import { Task } from "@/types"
@@ -16,7 +16,7 @@ export default function GetAllTasks() {
   const [tasks, setTasks] = useState<Task[]>([])
 
   async function getTasks() {
-    let { data }: any = await supabase.from("tasks").select("name")
+    let { data }: any = await supabase.from("tasks").select("*")
 
     setTasks(data)
   }
@@ -26,12 +26,15 @@ export default function GetAllTasks() {
   }, [tasks])
 
   const taskList = tasks.map((task: Task) => (
-    <TaskItem
-      id={task.id}
-      name={task.name}
-      key={task.id}
-      deleteTask={deleteTask}
-    />
+    <>
+      <TaskItem
+        id={task.id}
+        name={task.name}
+        key={task.id}
+        deleteTask={deleteTask}
+      />
+      <p>id = {task.id}</p>
+    </>
   ))
 
   const addTask = async (name: string) => {
@@ -44,8 +47,13 @@ export default function GetAllTasks() {
     setTasks((previousTasks) => [data, ...previousTasks])
   }
 
-  function deleteTask(id: any) {
-    const remainingTasks = tasks.filter((task: { id: any }) => id !== task.id)
+  async function deleteTask(id: number) {
+    const remainingTasks = tasks.filter(
+      (task: { id: number }) => id !== task.id
+    )
+
+    const { data } = await supabase.from("tasks").delete().eq("id", id)
+
     setTasks(remainingTasks)
   }
 
