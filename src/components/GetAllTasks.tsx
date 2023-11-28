@@ -1,11 +1,10 @@
 "use client"
 
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState, useContext, SetStateAction } from "react"
 import { createClient } from "@supabase/supabase-js"
 
 import { Task } from "@/types"
 import TaskItem from "./Task"
-import Form from "./Form"
 
 const supabase = createClient(
   "https://glunwpslyvazmcqzayth.supabase.co",
@@ -14,6 +13,7 @@ const supabase = createClient(
 
 export default function GetAllTasks() {
   const [tasks, setTasks] = useState<Task[]>([])
+  const [name, setName] = useState("")
 
   async function getTasks() {
     let { data }: any = await supabase.from("tasks").select("*")
@@ -26,7 +26,7 @@ export default function GetAllTasks() {
   }, [tasks])
 
   const taskList = tasks.map((task: Task) => (
-    <>
+    <div className="flex items-center">
       <TaskItem
         id={task.id}
         name={task.name}
@@ -34,13 +34,13 @@ export default function GetAllTasks() {
         deleteTask={deleteTask}
       />
       <p>id = {task.id}</p>
-    </>
+    </div>
   ))
 
-  const addTask = async (name: string) => {
+  async function addTask(taskName: string) {
     const newTodo = {
       id: Date.now(),
-      name: name,
+      name: taskName,
     }
 
     const { data }: any = await supabase.from("tasks").insert(newTodo).select()
@@ -57,6 +57,16 @@ export default function GetAllTasks() {
     setTasks(remainingTasks)
   }
 
+  function handleSubmit(e: { preventDefault: () => void }) {
+    e.preventDefault()
+    addTask(name)
+    setName("")
+  }
+
+  function handleChange(e: { target: { value: SetStateAction<string> } }) {
+    setName(e.target.value)
+  }
+
   const tasksNoun = tasks.length !== 1 ? "tasks" : "task"
   const headingText = `${tasks.length} ${tasksNoun} remaining`
 
@@ -65,7 +75,25 @@ export default function GetAllTasks() {
       <h2 id="list-heading" className="font-bold">
         {headingText}:
       </h2>
-      <Form addTask={addTask} />
+      <form onSubmit={handleSubmit} className="my-3">
+        <h2 className="label-wrapper">
+          <label htmlFor="new-todo-input" className="label__lg">
+            What needs to be done?
+          </label>
+        </h2>
+        <input
+          type="text"
+          id="new-todo-input"
+          className="input input__lg"
+          name="text"
+          autoComplete="off"
+          value={name}
+          onChange={handleChange}
+        />
+        <button type="submit" className="btn btn__primary btn__lg">
+          Add
+        </button>
+      </form>
       <ul role="list" aria-labelledby="list-heading">
         {taskList}
       </ul>
