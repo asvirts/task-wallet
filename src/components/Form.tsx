@@ -1,18 +1,18 @@
-"use client";
+"use client"
 
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useState } from "react"
 
-function Form(props: any) {
-  const [name, setName] = useState("");
+export default function Form(props: any) {
+  const [name, setName] = useState("")
 
   function handleSubmit(e: { preventDefault: () => void }) {
-    e.preventDefault();
-    props.addTask(name);
-    setName("");
+    e.preventDefault()
+    props.addTask(name)
+    setName("")
   }
 
   function handleChange(e: { target: { value: SetStateAction<string> } }) {
-    setName(e.target.value);
+    setName(e.target.value)
   }
 
   return (
@@ -35,7 +35,5 @@ function Form(props: any) {
         Add
       </button>
     </form>
-  );
+  )
 }
-
-export default Form;
