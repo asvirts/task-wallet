@@ -16,7 +16,10 @@ export default function GetAllTasks() {
   const [name, setName] = useState("");
 
   async function getTasks() {
-    let { data }: any = await supabase.from("tasks").select("*");
+    let { data }: any = await supabase
+      .from("tasks")
+      .select("*")
+      .order("id", { ascending: true });
 
     setTasks(data);
   }
@@ -56,7 +59,8 @@ export default function GetAllTasks() {
 
   function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
-    addTask(name);
+    addTask();
+    setName("");
   }
 
   function handleChange(e: { target: { value: SetStateAction<string> } }) {
