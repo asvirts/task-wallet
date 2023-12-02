@@ -19,7 +19,7 @@ export default function GetAllTasks() {
     let { data }: any = await supabase
       .from("tasks")
       .select("*")
-      .order("id", { ascending: true })
+      .order("due_date", { ascending: true })
 
     setTasks(data)
   }
