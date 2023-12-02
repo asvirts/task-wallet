@@ -15,7 +15,9 @@ export default function TaskItem(props: any) {
           defaultChecked={props.completed}
           className="hidden"
         />
-        <label htmlFor={props.id}>{props.name}</label>
+        <label htmlFor={props.id} data-taskId={props.id}>
+          {props.name}
+        </label>
         <small>due: {props.due_date}</small>
         <small>id: {props.id}</small>
       </div>
