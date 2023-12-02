@@ -16,6 +16,7 @@ export default function TaskItem(props: any) {
           className="hidden"
         />
         <label htmlFor={props.id}>{props.name}</label>
+        <small>due: {props.due_date}</small>
         <small>id: {props.id}</small>
       </div>
     </li>

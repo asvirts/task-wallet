@@ -30,7 +30,12 @@ export default function GetAllTasks() {
 
   const taskList = tasks.map((task: Task) => (
     <div className="flex flex-col items-start" key={task?.id}>
-      <TaskItem id={task?.id} name={task?.name} deleteTask={deleteTask} />
+      <TaskItem
+        id={task?.id}
+        name={task?.name}
+        due_date={task?.due_date}
+        deleteTask={deleteTask}
+      />
     </div>
   ))
 
@@ -38,6 +43,7 @@ export default function GetAllTasks() {
     const newTodo = {
       id: Date.now(),
       name: name,
+      due_date: Date.now,
     }
 
     console.log(newTodo)
