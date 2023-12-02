@@ -22,5 +22,5 @@ export default function TaskItem(props: any) {
         </button>
       </div>
     </li>
-  );
+  )
 }
