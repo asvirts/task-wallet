@@ -1,4 +1,14 @@
 export default function TaskItem(props: any) {
+  let dueId = "due-" + props.id
+  const dueDate = document.getElementById(`${dueId}`)
+  console.log("prop", props.due_date, "func", Date.UTC)
+
+  if (props.due_date < Date.toString) {
+    dueDate?.classList.add("text-red-600")
+  } else {
+    return
+  }
+
   return (
     <li className="todo stack-small my-2 flex items-center">
       <button
@@ -15,10 +25,12 @@ export default function TaskItem(props: any) {
           defaultChecked={props.completed}
           className="hidden"
         />
-        <label htmlFor={props.id} data-taskId={props.id}>
+        <label htmlFor={props.id} data-taskid={props.id}>
           {props.name}
         </label>
-        <small>due: {props.due_date}</small>
+        <small id={dueId} className="fs-1">
+          due: {props.due_date}
+        </small>
       </div>
     </li>
   )
