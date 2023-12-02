@@ -8,8 +8,6 @@ export default function TaskItem(props: any) {
   const day = dateObj.getUTCDay()
   const today = `${year}-${month}-${day}`
 
-  console.log(props.due_date, today)
-
   if (props.due_date < today) {
     dueDate?.classList.add("text-red-600")
   } else {
