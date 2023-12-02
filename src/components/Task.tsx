@@ -19,7 +19,6 @@ export default function TaskItem(props: any) {
           {props.name}
         </label>
         <small>due: {props.due_date}</small>
-        <small>id: {props.id}</small>
       </div>
     </li>
   )
