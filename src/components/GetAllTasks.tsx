@@ -29,9 +29,8 @@ export default function GetAllTasks() {
   }, [tasks])
 
   const taskList = tasks.map((task: Task) => (
-    <div className="flex items-center" key={task?.id}>
+    <div className="flex flex-col items-start" key={task?.id}>
       <TaskItem id={task?.id} name={task?.name} deleteTask={deleteTask} />
-      <p>id = {task?.id}</p>
     </div>
   ))
 

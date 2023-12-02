@@ -1,25 +1,22 @@
 export default function TaskItem(props: any) {
   return (
     <li className="todo stack-small my-2 flex items-center">
-      <div className="c-cb mx-1">
+      <button
+        type="button"
+        className="btn btn__danger mx-1"
+        onClick={() => props.deleteTask(props.id)}
+      >
+        Delete
+      </button>
+      <div className="flex flex-col mx-2">
         <input
           id={props.id}
           type="checkbox"
           defaultChecked={props.completed}
-          onChange={() => props.toggleTaskCompleted(props.id)}
+          className="hidden"
         />
-        <label className="todo-label mx-1" htmlFor={props.id}>
-          {props.name}
-        </label>
-      </div>
-      <div className="btn-group mx-1">
-        <button
-          type="button"
-          className="btn btn__danger"
-          onClick={() => props.deleteTask(props.id)}
-        >
-          Delete
-        </button>
+        <label htmlFor={props.id}>{props.name}</label>
+        <small>id: {props.id}</small>
       </div>
     </li>
   )
