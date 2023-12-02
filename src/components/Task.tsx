@@ -1,12 +1,19 @@
 export default function TaskItem(props: any) {
   let dueId = "due-" + props.id
   const dueDate = document.getElementById(`${dueId}`)
-  console.log("prop", props.due_date, "func", Date.UTC)
 
-  if (props.due_date < Date.toString) {
+  const dateObj = new Date()
+  const year = dateObj.getUTCFullYear()
+  const month = dateObj.getUTCMonth()
+  const day = dateObj.getUTCDay()
+  const today = `${year}-${month}-${day}`
+
+  console.log(props.due_date, today)
+
+  if (props.due_date < today) {
     dueDate?.classList.add("text-red-600")
   } else {
-    return
+    dueDate?.classList.add("text-slate-500")
   }
 
   return (
@@ -16,7 +23,7 @@ export default function TaskItem(props: any) {
         className="btn btn__danger mx-1"
         onClick={() => props.deleteTask(props.id)}
       >
-        Delete
+        Complete
       </button>
       <div className="flex flex-col mx-2">
         <input
