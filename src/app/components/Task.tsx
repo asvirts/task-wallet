@@ -4,8 +4,8 @@ export default function TaskItem(props: any) {
 
   const dateObj = new Date()
   const year = dateObj.getUTCFullYear()
-  const month = dateObj.getUTCMonth()
-  const day = dateObj.getUTCDay()
+  const month = dateObj.getMonth()
+  const day = dateObj.getDay()
   const today = `${year}-${month}-${day}`
 
   if (props.due_date < today) {
