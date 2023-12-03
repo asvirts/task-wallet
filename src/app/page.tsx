@@ -11,7 +11,7 @@ export default async function Home() {
   const session = await auth()
 
   if (!session?.user) {
-    return <div>Not logged in...</div>
+    return <h1 className="text-xl flex justify-center">Not logged in...</h1>
   } else
     return (
       <main className="p-5">
