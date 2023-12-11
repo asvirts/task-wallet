@@ -1,1 +1,5 @@
-I bet you've never seen a to-do app before
+## To-do app built with:
+- Next.js + React
+- Typescript
+- Tailwind
+- PostgreSQL database
