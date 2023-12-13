@@ -45,7 +45,7 @@ export default function GetAllTasks() {
     const newTodo = {
       id: Date.now(),
       name: name,
-      due_date: Date.now,
+      due_date: Date.now()
     }
 
     console.log(newTodo)
