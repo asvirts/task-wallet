@@ -1,5 +1,3 @@
-import { EmailOtpType } from "@supabase/supabase-js"
-
 export type Task = {
   id: number
   name: string
